@@ -8,13 +8,14 @@ def create_app():
     """функция, объявляющая фласк"""
 
     app = Flask(__name__)
-    db.init_app(app) #инициализация БД
+
     with app.app_context():
         app.config.from_object('config.Config')
         api = Api(app) #создаем объект App
         app.config['api'] = api
         from application import routes
-        return app
+    db.init_app(app)  # инициализация БД
+    return app
 
 
 
